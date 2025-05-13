@@ -1,0 +1,15 @@
+import numpy as np
+from sklearn.mixture import GaussianMixture
+
+# Sample data
+X = np.array([[1], [2], [3], [10], [11], [12]])
+
+# Apply EM algorithm using Gaussian Mixture Model
+gmm = GaussianMixture(n_components=2, random_state=0)
+gmm.fit(X)
+
+# Predict cluster for each point
+labels = gmm.predict(X)
+
+print("Cluster assignments:", labels)
+print("Means of clusters:", gmm.means_)
