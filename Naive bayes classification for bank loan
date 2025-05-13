@@ -1,0 +1,41 @@
+# Step 1: Import required libraries
+from sklearn.naive_bayes import GaussianNB
+from sklearn.preprocessing import LabelEncoder
+
+# Step 2: Sample data - [age, income, student, credit_rating]
+data = [
+    ['young', 'high', 'no', 'fair'],
+    ['young', 'high', 'no', 'excellent'],
+    ['middle', 'high', 'no', 'fair'],
+    ['senior', 'medium', 'no', 'fair'],
+    ['senior', 'low', 'yes', 'fair'],
+    ['senior', 'low', 'yes', 'excellent'],
+    ['middle', 'low', 'yes', 'excellent'],
+    ['young', 'medium', 'no', 'fair'],
+    ['young', 'low', 'yes', 'fair'],
+    ['senior', 'medium', 'yes', 'fair'],
+]
+
+# Labels: Yes (loan approved) or No
+labels = ['no', 'no', 'yes', 'yes', 'yes', 'no', 'yes', 'no', 'yes', 'yes']
+
+# Step 3: Convert text data to numbers
+le = LabelEncoder()
+encoded_data = []
+for col in zip(*data):  # Transpose columns
+    encoded_data.append(le.fit_transform(col))
+X = list(zip(*encoded_data))  # Transpose back to rows
+y = le.fit_transform(labels)  # Encode labels
+
+# Step 4: Train Naive Bayes model
+model = GaussianNB()
+model.fit(X, y)
+
+# Step 5: Predict on new sample: ['young', 'medium', 'yes', 'excellent']
+test_sample = [['young', 'medium', 'yes', 'excellent']]
+encoded_test = [le.fit_transform(col) for col in zip(*test_sample)]
+X_test = list(zip(*encoded_test))
+
+# Predict and print result
+prediction = model.predict(X_test)
+print("Loan approved?" , 'yes' if prediction[0] == 1 else 'no')
