@@ -1,0 +1,24 @@
+# Step 1: Import necessary libraries
+from sklearn.datasets import load_iris
+from sklearn.linear_model import Perceptron
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# Step 2: Load IRIS dataset
+iris = load_iris()
+X = iris.data       # Features (4 columns)
+y = iris.target     # Labels (0, 1, 2)
+
+# Step 3: Split into training and testing data (80% train, 20% test)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Step 4: Create and train Perceptron model
+model = Perceptron()
+model.fit(X_train, y_train)
+
+# Step 5: Predict on test data
+y_pred = model.predict(X_test)
+
+# Step 6: Show accuracy
+accuracy = accuracy_score(y_test, y_pred)
+print("Perceptron Accuracy on IRIS dataset:", accuracy)
