@@ -1,0 +1,12 @@
+from sklearn import tree
+
+# Sample data
+features = [[1, 1], [1, 0], [0, 1], [0, 0]]
+labels = ['Yes', 'Yes', 'No', 'No']
+
+# Build Decision Tree
+clf = tree.DecisionTreeClassifier()
+clf = clf.fit(features, labels)
+
+# Predict
+print("Prediction for [1,1]:", clf.predict([[1, 1]]))
