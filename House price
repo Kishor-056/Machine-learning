@@ -1,0 +1,15 @@
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Sample data: [Area (sqft), Bedrooms]
+X = np.array([[1000, 2], [1500, 3], [2000, 4], [2500, 4], [1200, 2]])
+# House Prices in lakhs
+y = np.array([50, 70, 90, 110, 60])
+
+# Train model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict price of a house (1600 sqft, 3 bedrooms)
+prediction = model.predict([[1600, 3]])
+print("Predicted house price (in lakhs):", round(prediction[0], 2))
