@@ -1,0 +1,15 @@
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Sample data: [Car Age in years, Mileage in 1000s]
+X = np.array([[1, 10], [2, 20], [3, 30], [4, 40], [5, 50]])
+# Car Prices in lakhs
+y = np.array([10, 9, 7, 6, 4])
+
+# Create and train the model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict price of a car (2 years old, 15,000 km mileage)
+prediction = model.predict([[2, 15]])
+print("Predicted car price (in lakhs):", round(prediction[0], 2))
