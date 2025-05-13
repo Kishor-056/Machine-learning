@@ -1,0 +1,17 @@
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Step 1: Sample monthly sales data (Month number, Sales)
+X = np.array([[1], [2], [3], [4], [5]])  # Months
+y = np.array([100, 120, 130, 150, 170])  # Sales
+
+# Step 2: Train model
+model = LinearRegression()
+model.fit(X, y)
+
+# Step 3: Predict sales for 6th month
+future_month = [[6]]
+predicted_sales = model.predict(future_month)
+
+# Step 4: Show result
+print("Predicted sales for month 6:", round(predicted_sales[0]))
