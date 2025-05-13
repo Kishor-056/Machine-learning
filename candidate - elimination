@@ -1,0 +1,33 @@
+def candidate_elimination(examples):
+    G = [['?' for _ in range(len(examples[0]) - 1)]]
+    S = examples[0][:-1]
+
+    for instance in examples:
+        x, label = instance[:-1], instance[-1]
+        if label == 'Yes':
+            for i in range(len(S)):
+                if S[i] != x[i]:
+                    S[i] = '?'
+        else:
+            new_G = []
+            for i in range(len(S)):
+                if S[i] == '?':
+                    for val in set([e[i] for e in examples if e[-1] == 'Yes']):
+                        new_hypothesis = S.copy()
+                        new_hypothesis[i] = val
+                        if new_hypothesis != S:
+                            new_G.append(new_hypothesis)
+            G = new_G
+    return S, G
+
+# Sample dataset
+data = [
+    ['Sunny', 'Warm', 'Normal', 'Strong', 'Warm', 'Same', 'Yes'],
+    ['Sunny', 'Warm', 'High', 'Strong', 'Warm', 'Same', 'Yes'],
+    ['Rainy', 'Cold', 'High', 'Strong', 'Warm', 'Change', 'No'],
+    ['Sunny', 'Warm', 'High', 'Strong', 'Cool', 'Change', 'Yes']
+]
+
+S, G = candidate_elimination(data)
+print("S:", S)
+print("G:", G)
