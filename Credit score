@@ -1,0 +1,18 @@
+from sklearn.linear_model import LogisticRegression
+import numpy as np
+
+# Sample data [Income, LoanAmount]
+X = np.array([[50000, 10000], [60000, 15000], [30000, 5000],
+              [25000, 10000], [70000, 20000], [20000, 12000]])
+
+# Labels: 1 = Good credit, 0 = Bad credit
+y = np.array([1, 1, 1, 0, 1, 0])
+
+# Train the model
+model = LogisticRegression()
+model.fit(X, y)
+
+# Predict for a new person with income 40000 and loan 8000
+prediction = model.predict([[40000, 8000]])
+
+print("Credit Score Classification:", "Good" if prediction[0] == 1 else "Bad")
